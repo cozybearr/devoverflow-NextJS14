@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
 import { ClerkProvider } from '@clerk/nextjs'
 import './globals.css'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/context/ThemeProvider'
+import React from 'react'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,20 +20,15 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: 'DevOverflow',
-  description:
-    'A community-driven online platform for asking and answering programming questions.',
+  description: 'A community-driven online platform for asking and answering programming questions.',
   icons: {
-    icon: '/assets/image/site-logo.svg',
+    icon: '/assets/images/site-logo.svg',
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
         <ClerkProvider
           appearance={{

@@ -1,35 +1,33 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from 'react'
 
-interface ThemeContextType {
+interface ThemeContextInterface {
   mode: string
-  setMode: (mode: string) => void
+  setMode: Dispatch<SetStateAction<string>>
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>()
+const ThemeContext = createContext<ThemeContextInterface | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mode, setMode] = useState('')
   const handleThemeChange = () => {
-    if (mode === 'dark') {
-      setMode('light')
-      document.documentElement.classList.add('light')
-    } else {
-      setMode('dark')
+    if (
+      localStorage.getItem('theme') === 'dark' ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
       document.documentElement.classList.add('dark')
+      setMode('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+      setMode('light')
     }
   }
 
   useEffect(() => {
     handleThemeChange()
   }, [mode])
-
-  return (
-    <ThemeContext.Provider value={{ mode, setMode }}>
-      {children}
-    </ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={{ mode, setMode }}>{children}</ThemeContext.Provider>
 }
 
 export function useTheme() {
@@ -37,4 +35,5 @@ export function useTheme() {
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider')
   }
+  return context
 }
