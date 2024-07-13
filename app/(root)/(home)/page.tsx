@@ -15,7 +15,7 @@ export default async function Home() {
       <div className='flex justify-between'>
         <h1 className='h1-bold text-dark100_light900'>All Questions</h1>
         <Link href='ask-question'>
-          <Button className='primary-gradient text-light-900 min-h-[46px] px-4 py-3'>Ask Question</Button>
+          <Button className='primary-gradient text-light-900 min-h-[46px] px-4 py-3'>Ask A Question</Button>
         </Link>
       </div>
 
