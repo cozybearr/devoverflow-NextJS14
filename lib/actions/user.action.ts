@@ -2,9 +2,9 @@
 
 import User from '@/database/user.model'
 import { connectToDatabase } from '../mongoose'
-import { CreateUserParams, DeleteUserParams, UpdateUserParams } from './shared.types'
 import Question from '@/database/question.model'
 import { revalidatePath } from 'next/cache'
+import { CreateUserParams, DeleteUserParams, UpdateUserParams } from './shared.types'
 
 export async function getUserById(params: any) {
   try {
