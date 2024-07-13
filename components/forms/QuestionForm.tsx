@@ -39,10 +39,12 @@ const QuestionForm = ({ mongoUserId }: Props) => {
         title: values.title,
         content: values.explanation,
         tags: values.tags,
-        authors: mongoUserId,
+        author: JSON.parse(mongoUserId),
+        path: pathName,
       })
       router.push('/')
     } catch (error) {
+      console.log(error)
     } finally {
       setIsSubmitting(false)
     }
