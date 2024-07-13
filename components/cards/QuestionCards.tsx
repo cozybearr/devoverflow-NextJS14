@@ -35,7 +35,7 @@ export default function QuestionCards({ id, title, tags, author, upvotes, views,
       </div>
       <div className='mt-6 flex flex-wrap justify-between gap-3'>
         <Metric
-          imgUrl='assets/icons/avatr.svg'
+          imgUrl='assets/icons/avatar.svg'
           alt='User'
           value={author.name}
           title={` - asked ${getTimeStamp(createdAt)}`}

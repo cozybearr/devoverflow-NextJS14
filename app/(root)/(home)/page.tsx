@@ -1,11 +1,11 @@
 import Filter from '@/components/shared/Filter'
 import HomeFilter from '@/components/home/HomeFilter'
+import LocalSearchBar from '@/components/shared/search/LocalSearchBar'
 import { Button } from '@/components/ui/button'
 import { HomePageFilters } from '@/constants/filters'
 import Link from 'next/link'
-import QuestionCards from '@/components/cards/QuestionCards'
-import LocalSearchBar from '@/components/shared/search/LocalSearchBar'
 import NoResult from '@/components/shared/NoResult'
+import QuestionCards from '@/components/cards/QuestionCards'
 
 const questions = [
   {
@@ -59,7 +59,7 @@ export default function Home() {
         <Filter
           filters={HomePageFilters}
           otherClasses='min-h-[56px] sm:min-w-[170px]'
-          containerClasses='hidden max-md:block'
+          containerClasses='hidden max-md:flex'
         />
       </div>
       <HomeFilter />
@@ -83,8 +83,8 @@ export default function Home() {
           <NoResult
             title='There are no questions to show'
             description='Be the first to break the silence! 🚀 Ask a Question and kickstart the
-            discussion. our query could be the next big thing others learn from. Get
-            involved! 💡'
+          discussion. our query could be the next big thing others learn from. Get
+          involved! 💡'
             linkTo='/ask-question'
             linkDescription='Ask Question'
           />
