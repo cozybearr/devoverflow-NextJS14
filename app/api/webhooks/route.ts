@@ -6,11 +6,13 @@ import { createUser, deleteUser, updateUser } from '@/lib/actions/user.action'
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
-  // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
+  // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
 
+  console.log(WEBHOOK_SECRET)
+
   if (!WEBHOOK_SECRET) {
-    throw new Error('Please add WEBHOOK_SECRET from Clerk Dashboard to .env')
+    throw new Error('Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local')
   }
 
   // Get the headers
@@ -49,12 +51,13 @@ export async function POST(req: Request) {
     })
   }
 
-  // Do something with the payload
-  // For this guide, you simply log the payload to the console
+  // Get the ID and type
   const eventType = evt.type
 
   if (eventType === 'user.created') {
     const { id, email_addresses, first_name, last_name, image_url, username } = evt.data
+
+    // create new user
     const mongoUser = await createUser({
       clerkId: id,
       email: email_addresses[0].email_address,
@@ -67,7 +70,7 @@ export async function POST(req: Request) {
 
   if (eventType === 'user.updated') {
     const { id, email_addresses, first_name, last_name, image_url, username } = evt.data
-    console.log('email_adresses', email_addresses)
+
     // update user
     const updatedUser = await updateUser({
       clerkId: id,
@@ -91,5 +94,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'OK', user: deletedUser })
   }
 
-  return new Response('', { status: 200 })
+  return NextResponse.json({ message: 'OK' })
 }
