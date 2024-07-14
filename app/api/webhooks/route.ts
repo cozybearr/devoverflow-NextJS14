@@ -62,7 +62,7 @@ export async function POST(req: Request) {
       picture: image_url,
       username: username as string,
     })
-    return NextResponse.json({ message: 'OKeeeee', user: mongoUser })
+    return NextResponse.json({ message: 'OK', user: mongoUser })
   }
 
   if (eventType === 'user.updated') {
